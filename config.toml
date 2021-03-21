@@ -1,0 +1,84 @@
+baseURL = "http://localhost"
+title = "Jakey's Blackhole"
+theme = "hugo-geekblog"
+
+# Geekblog required configuration
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+disablePathToLower = true
+
+# Needed for mermaid shortcodes
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 9
+
+[taxonomies]
+  author = "authors"
+  tag = "tags"
+
+[mediaTypes]
+  [mediaTypes."application/atom+xml"]
+    suffixes = ["xml"]
+
+[outputFormats]
+  [outputFormats.Atom]
+    name = "Atom"
+    mediaType = "application/atom+xml"
+    baseName = "atom"
+    isPlainText = false
+    rel = "alternate"
+    isHTML = false
+    noUgly = true
+    permalinkable = false
+
+[outputFormats.outputs]
+  home = ["HTML", "ATOM"]
+  page = ["HTML"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML", "ATOM"]
+
+[params]
+  subtitle = "Blog about my favorite topics"
+  description = "This is my personal blog about tech."
+
+  geekblogAuthor = "jakey"
+
+#   logo = "logo.png"
+
+  # (Optional, default 6) Set how many table of contents levels to be showed on page.
+  # Use false to hide ToC, note that 0 will default to 6 (https://gohugo.io/functions/default/)
+  # You can also specify this parameter per page in front matter.
+  geekblogToC = 3
+
+  # (Optional, default none) Add a link to your Legal Notice page to the site footer.
+  # It can be either a remote url or a local file path relative to your content directory.
+#   geekblogLegalNotice = "https://blog.example.com/legal"
+
+  # (Optional, default none) Add a link to your Privacy Policy page to the site footer.
+  # It can be either a remote url or a local file path relative to your content directory.
+#   geekblogPrivacyPolicy = "/privacy"
+
+  # (Optional, default true) Add an anchor link to headlines.
+  geekblogAnchor = true
+
+  # (Optional, default true) Copy anchor url to clipboard on click.
+  geekblogAnchorCopy = true
+
+  # (Optional, default posts) Set the name of the default content section.
+  geekblogContentSection = "my-pages"
+
+  # (Optional, default none) Adds a "Hosted on <provider>" line to the footer.
+  # Could be used if you want to give credits to your hosting provider.
+#   [params.geekblogHostedOn]
+#     name = "Uberspace"
+#     link = "https://uberspace.de/en/"
+
+  # (Optional, default none) Adds a "Content licensed under <license>" line to the footer.
+  # Could be used if you want to define a default license for your content.
+  [params.geekblogContentLicense]
+    name = "CC BY-SA 4.0"
+    link = "https://creativecommons.org/licenses/by-sa/4.0/"
