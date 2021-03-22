@@ -1,5 +1,5 @@
 baseURL = "http://localhost"
-title = "Jakey's Blackhole"
+title = "Jakey's Blog"
 theme = "hugo-geekblog"
 
 # Geekblog required configuration
@@ -42,7 +42,7 @@ disablePathToLower = true
   term = ["HTML", "ATOM"]
 
 [params]
-  subtitle = "Blog about my favorite topics"
+#  subtitle = ""
   description = "This is my personal blog about tech."
 
   geekblogAuthor = "jakey"
