@@ -90,13 +90,33 @@ UI上的SelfObservability里面也会以这个url标识当前的oap server实例
 
 ### 应用集成
 
+agent包可以放在服务器上的一个公共位置，供这台服务器上的各应用使用。
+
+这里要注意的是，agent的配置文件(***agent路径/config/agent.config***)中的 *collector.backend_service* 要配置各个Oap Server 的地址，多个可以用逗号分隔。这里有两种配置方法，
+
+1.ip法，也是官方文档默认的，具体就是类似  *ip1:port1, ip2:port2, ip3:port3*  ， 可能会遇到的问题就是以后的扩容问题，比如随着skywalking集成的应用越来越多，这时要扩充oap server的实例，比如从两台oap server扩到四台，那么agent这里的配置也要对应修改到四台的配置，修改完，应用还要**重启**后才能生效。
+
+2.主机法，因为skywalking源码里面是按ip和端口用分号":"分隔解析的，所有主机法也要配置一个端口，我们一般要选择80。类似  *oapserver.loadbalance.hostname:80*  , 同时 nginx 上面还要配置它的负载均衡， 由于请求是grpc，所有，nginx版本至少要 1.13 版本之后，启动grpc模块。（可以参考： https://github.com/apache/skywalking/issues/4367 ）
+
+其他的配置理论上可以不用改，运行时动态设置，举例如下：
+
+```
+java -Dskywalking.agent.service_name=应用名  -javaagent:skywalking-agent包解压路径/skywalking-agent.jar -Dskywalking.logging.file_name=应用名.log   -jar xxxx.jar
+```
 
 
 
 
 
+## 常见异常
 
+一些相关链接：  https://my.oschina.net/osgit/blog/4558674
 
+下面是一些遇过的问题，
+
+1.**Grpc server thread pool is full, rejecting the task**
+
+升级es版本到7.11后解决，本质原因是es 客户端6.x的bulk类请求的bug ， 出问题通过jstack可以发现死锁，相关的ES issue 链接： https://github.com/elastic/elasticsearch/issues/47599
 
 
 
